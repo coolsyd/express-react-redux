@@ -3,7 +3,7 @@
  */
 require('../css/navigation.css');
 import React from "react";
-import {Link} from "react-router";
+
 class SingleNav extends React.Component {
     render() {
         return (
@@ -12,12 +12,26 @@ class SingleNav extends React.Component {
     }
 }
 class Nav extends React.Component {
+    componentDidMount() {
+        fetch('//offline-news-api.herokuapp.com/stories')
+            .then(function(response) {
+                if (response.status >= 400) {
+                    throw new Error("Bad response from server");
+                }
+                console.log(response);
+                return response.json();
+            })
+            .then(function(stories) {
+                console.log(stories);
+            });
+    }
+
     render() {
         return (
             <ul className="nav">
-                <li className="active"><a href="#">Home</a></li>
-                <li><a href="#/test01">test01</a></li>
-                <li><a href="#/test02">test02</a></li>
+                <li className="active"><a href="/views/">Home</a></li>
+                <li><a href="/views/users">/users</a></li>
+                <li><a href="/views/about">/about</a></li>
                 <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                         Dropdown <b className="caret"></b>
@@ -36,4 +50,19 @@ class Nav extends React.Component {
         )
     }
 }
+
+function getJSON(url, cb) {
+    const req = new XMLHttpRequest()
+    req.onload = function () {
+        if (req.status === 404) {
+            cb(new Error('not found'))
+        } else {
+            cb(null, JSON.parse(req.response))
+        }
+    }
+    req.open('GET', url)
+    req.setRequestHeader('authorization', localStorage.token)
+    req.send()
+}
+
 export {Nav, SingleNav}

@@ -1,26 +1,91 @@
-require('./css/base.css');
 import React from "react";
 import {render} from "react-dom";
-import {Router, Route} from "react-router";
+import { Router, Route, IndexRoute, Link, IndexLink } from 'react-router'
+import {createHistory, useBasename} from "history";
 import {Topbar} from "./components/topbar";
-import {Test01} from "./components/test01";
-import {Test02} from "./components/test02";
 import {Provider} from "react-redux";
 import createStore from "./store";
-// import reducers from "./reducers";
 
 const store = createStore();
 
-const rootElement = document.getElementById('root');
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <Topbar />
+                <div style={{marginTop:'40px'}}>
+                    {this.props.children}
+                </div>
+            </div>
+        )
+    }
+}
 
-render(
+class Index extends React.Component {
+    render() {
+        return (
+            <div>
+                <h2>Index!</h2>
+            </div>
+        )
+    }
+}
+
+class Users extends React.Component {
+    render() {
+        return (
+            <div>
+                <h2>Users</h2>
+            </div>
+        )
+    }
+}
+
+class UsersIndex extends React.Component {
+    render() {
+        return (
+            <div>
+                <h3>UsersIndex</h3>
+            </div>
+        )
+    }
+}
+
+class User extends React.Component {
+    render() {
+        return (
+            <div>
+                <h3>User {this.props.params.id}</h3>
+            </div>
+        )
+    }
+}
+
+class About extends React.Component {
+    render() {
+        return (
+            <div>
+                <h2>About</h2>
+            </div>
+        )
+    }
+}
+
+const history = useBasename(createHistory)({
+    basename: '/views'
+});
+
+render((
     <Provider store={store}>
-        <Router>
-            <Route path="/" component={Topbar}>
-                <Route path="test01" component={Test01}/>
-                <Route path="test02" component={Test02}/>
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Index}/>
+                <Route path="/about" component={About}/>
+                <Route path="users" component={Users}>
+                    <IndexRoute component={UsersIndex}/>
+                    <Route path=":id" component={User}/>
+                </Route>
             </Route>
         </Router>
-    </Provider>,
-    rootElement
-);
+    </Provider>
+), document.getElementById('app'));

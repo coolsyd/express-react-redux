@@ -7,4 +7,7 @@ module.exports = function (app) {
     app.get('/bundle.js', function (req, res) {
         proxy.web(req, res, {target: 'http://localhost:8080'});
     });
+    app.all('/PBD/*', function (req, res) {
+        proxy.web(req, res, {target: 'http://172.16.61.246:18080'});
+    });
 };
