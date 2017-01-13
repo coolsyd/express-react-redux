@@ -3,7 +3,7 @@
  */
 require('../css/navigation.css');
 import React from "react";
-
+import $ from "jquery";
 class SingleNav extends React.Component {
     render() {
         return (
@@ -13,17 +13,15 @@ class SingleNav extends React.Component {
 }
 class Nav extends React.Component {
     componentDidMount() {
-        fetch('//offline-news-api.herokuapp.com/stories')
-            .then(function(response) {
-                if (response.status >= 400) {
-                    throw new Error("Bad response from server");
-                }
-                console.log(response);
-                return response.json();
-            })
-            .then(function(stories) {
-                console.log(stories);
-            });
+        $.get(this.props.source, function (result) {
+            var lastGist = result[0];
+            if (this.isMounted()) {
+                this.setState({
+                    username: lastGist.owner.login,
+                    lastGistUrl: lastGist.html_url
+                });
+            }
+        }.bind(this));
     }
 
     render() {

@@ -1,14 +1,14 @@
 var path = require('path');
 var node_modules = path.resolve(__dirname, 'node_modules');
-var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
-var pathToReactDOM = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js');
+// var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+// var pathToReactDOM = path.resolve(node_modules, 'react-dom/dist/react-dom.min.js');
 var config = {
-    resolve: {
-        alias: {
-            'react': pathToReact,
-            'react-dom': pathToReactDOM
-        }
-    },
+    // resolve: {
+    //     alias: {
+    //         'react': pathToReact,
+    //         'react-dom': pathToReactDOM
+    //     }
+    // },
     entry: [
         // 'webpack/hot/dev-server',
         path.resolve(__dirname, 'react/main.js')
@@ -33,8 +33,8 @@ var config = {
                 test: /\.js$/,
                 loaders: ['es3ify-loader']
             }
-        ],
-        noParse: [pathToReact, pathToReactDOM]
+        ]/*,
+        noParse: [pathToReact, pathToReactDOM]*/
     }
 };
 
