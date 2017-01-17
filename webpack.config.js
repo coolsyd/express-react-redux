@@ -11,7 +11,7 @@ var config = {
     // },
     entry: [
         // 'webpack/hot/dev-server',
-        path.resolve(__dirname, 'react/main1.js')
+        path.resolve(__dirname, 'react/main.js')
     ],
     output: {
         path: path.resolve(__dirname, 'public/dist'),

@@ -14,12 +14,12 @@
 <script type="text/javascript" src="/lib/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 
-    $('#sub').on('click', function() {
+    $('#sub').on('click', function () {
         signup();
     });
-    $('input').on('keyup', function(e) {
+    $('input').on('keyup', function (e) {
         e = e || window.event;
-        if(e.keyCode === 13) {
+        if (e.keyCode === 13) {
             signup();
         }
     });
@@ -29,10 +29,14 @@
             password: $('#password').val(),
             type: "1"
         };
-        var si = $.getJSON('/PBD/login/',userInfo);
-        si.then(function(json) {
-            if(json.resultCode === '200') {
-                window.location.href = '/';
+        var si = $.getJSON('/PBD/login/', userInfo);
+        si.then(function (json) {
+            if (json.resultCode === '200') {
+                $.getJSON('/loginSuccess/').then(function (res) {
+                    if (res.resultCode === '200') {
+                        location.href = '/';
+                    }
+                });
             } else {
             }
         });

@@ -81,10 +81,7 @@ render((
             <Route path="/" component={App}>
                 <IndexRoute component={Index}/>
                 <Route path="/about" component={About}/>
-                <Route path="users" component={Users}>
-                    <IndexRoute component={UsersIndex}/>
-                    <Route path=":id" component={User}/>
-                </Route>
+                <Route path="users" component={Users}/>
             </Route>
         </Router>
     </Provider>
