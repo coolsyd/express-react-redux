@@ -32,7 +32,7 @@
         var si = $.getJSON('/PBD/login/', userInfo);
         si.then(function (json) {
             if (json.resultCode === '200') {
-                $.getJSON('/loginSuccess/').then(function (res) {
+                $.getJSON('/loginSuccess').then(function (res) {
                     if (res.resultCode === '200') {
                         location.href = '/';
                     }

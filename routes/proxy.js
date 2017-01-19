@@ -9,13 +9,6 @@ module.exports = function (app) {
         proxy.web(req, res, {target: 'http://localhost:8080'});
     });
     app.all('/PBD/*', function (req, res) {
-        // console.log(req.query + ',' + req.params + ',' + req.url);
-        console.log(req.query);
-        console.log(req.params);
-        console.log(req.path);
-        // if (/^\/PBD\/login\/?/.test(req.path)) {
-        //     req.session.username = req.query.userName;
-        // }
         proxy.web(req, res, {target: 'http://' + config.backend.host + ':' + config.backend.port}, function(e) {
             console.log(e);
         });

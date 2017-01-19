@@ -9,7 +9,7 @@ module.exports = function (app) {
     });
     app.get('/loginSuccess', function (req, res) {
         req.session.auth = true;
-        res.end('{"resultCode":"200"}');
+        res.json({"resultCode":"200"});
     });
     app.use(authSession.authUser);
     app.get('/', function (req, res) {
