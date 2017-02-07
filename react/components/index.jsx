@@ -1,8 +1,4 @@
-/**
- * Created by zjy on 16-2-19.
- */
-import React from 'react'
-import { Link } from 'react-router'
+import React from "react";
 export default class Index extends React.Component {
     render() {
         return (

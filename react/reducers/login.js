@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-21.
- */
 import { LOGIN_REQUEST, LOGIN_RECEIVE, LOGOUT } from '../actions'
 export default function login (state = {
     isLogin: false,

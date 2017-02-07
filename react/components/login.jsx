@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-19.
- */
 import React from 'react'
 import { Link, Redirect } from 'react-router'
 export default class Login extends React.Component {

@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-19.
- */
 import fetch from 'isomorphic-fetch'
 
 //登录

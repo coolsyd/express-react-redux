@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-19.
- */
 import { createSelector } from 'reselect'
 
 const login = (state) => state.login;

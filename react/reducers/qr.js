@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-21.
- */
 import { QR_REQUEST, QR_RECEIVE } from '../actions'
 //import Auth from '../auth/auth'
 export default function qr (state = {

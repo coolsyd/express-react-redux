@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-1.
- */
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'

@@ -1,6 +1,3 @@
-/**
- * Created by zjy on 16-2-19.
- */
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
 import { action_logout } from '../actions'
