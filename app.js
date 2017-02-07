@@ -1,16 +1,19 @@
-var express = require('express');
-var session = require('express-session');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var httpConcat = require('http-concat');
-var compress = require('compression');
-var routes = require("./routes");
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const httpConcat = require('http-concat');
+const compress = require('compression');
+//const RedisStore = require('connect-redis')(session);
 
-var app = express();
 
+const ReactRouter = require('./routes/server');
+const users = require('./routes/users');
+
+const app = express();
 app.use(compress());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,38 +21,43 @@ app.set('view engine', 'ejs');
 
 app.use(session({
     secret: 'PBD',
+    // name: 'testapp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+    // cookie: {maxAge: 80000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
     resave: true,
     saveUninitialized: true
 }));
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//var onemonth = 60 * 1000 * 60 * 24 * 30;
+//
+//var redisStore = new RedisStore({
+//    "host": '127.0.0.1',
+//    "port": '6379',
+//    "ttl": 60 * 60 * 1,   //Session的有效期为1小时
+//});
+//app.use(session({
+//    secret: 'wechat',
+//    cookie: {maxAge: 60 * 60 * 24 * 1000}, //一天
+//    resave: false,
+//    saveUninitialized: true,
+//    store: redisStore
+//}));
+
+
+
+// 通常用于加载静态资源
+//console.log(path.resolve('public'));
+//console.log('__filename:'+ path.resolve(__filename));
+//console.log('__dirname:'+ path.resolve(__dirname));
+//console.log(process.cwd());
+app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use(httpConcat({
     base: path.join(__dirname, '/public'),
     separator: '@@'
 }));
-routes(app);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
+app.use('/users', users);
+app.use('/', ReactRouter);
 
 module.exports = app;
