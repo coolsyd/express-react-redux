@@ -11,7 +11,7 @@ import routes from './routes'
 //import * as reducers from './reducers'
 import reducers from './reducers'
 
-const store = createStore(reducers, __INITIAL_STATE__);
+const store = createStore(reducers);
 
 //middleware.listenForReplays(store)
 

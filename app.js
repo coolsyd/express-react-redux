@@ -52,9 +52,9 @@ app.use(cookieParser());
 //console.log('__filename:'+ path.resolve(__filename));
 //console.log('__dirname:'+ path.resolve(__dirname));
 //console.log(process.cwd());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'react/public')));
 app.use(httpConcat({
-    base: path.join(__dirname, '/public'),
+    base: path.join(__dirname, 'react/public'),
     separator: '@@'
 }));
 app.use('/users', users);
