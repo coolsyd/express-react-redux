@@ -18,7 +18,12 @@
   <![endif]-->
 </head>
 <body>
-<div id="app"></div>
+<div id="root">
+    <%- __html__ %>
+</div>
+<script>
+    window.__INITIAL_STATE__ = <%- __state__ %>;
+</script>
 <!--[if lte IE 8]>
 <script src="/lib/es5-shim.min.js"></script>
 <script src="/lib/es5-sham.min.js"></script>
@@ -31,17 +36,16 @@
 <!--[if lte IE 6]>
 <script type="text/javascript" src="/lib/js/bootstrap-ie.js"></script>
 <script type="text/javascript">
-  var console=console||{log:function(){return;}}
+    var console=console||{log:function(){return;}}
 </script>
 <![endif]-->
 <script type="text/javascript">
-  (function ($) {
-    $(document).ready(function () {
-      if ($.isFunction($.bootstrapIE6)) $.bootstrapIE6($(document));
-    });
-  })(jQuery);
+    (function ($) {
+        $(document).ready(function () {
+            if ($.isFunction($.bootstrapIE6)) $.bootstrapIE6($(document));
+        });
+    })(jQuery);
 </script>
-<script src="/bundle.js"></script>
-<!--<script src="/dist/bundle.js"></script>-->
+<script type="text/javascript" src="/public/bundle.js"></script>
 </body>
 </html>
