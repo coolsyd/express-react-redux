@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/wwwApp",
-    "views": "node ./views/react/server.js",
+    "views": "node ./react/server.js",
     "server": "webpack --config webpack.server.config.js && webpack --config webpack.static.config.js --optimize-minimize"
   },
   "dependencies": {
