@@ -1,69 +1,106 @@
-// import $ from "jquery";
+/**
+ * Created by zjy on 16-2-19.
+ */
+import fetch from 'isomorphic-fetch'
 
-export const REQUEST_POSTS = 'REQUEST_POSTS'
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const SELECT_REDDIT = 'SELECT_REDDIT'
-export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
+//登录
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_RECEIVE = 'LOGIN_RECEIVE';
 
-export function selectReddit(reddit) {
-    return {
-        type: SELECT_REDDIT,
-        reddit
-    }
-}
-
-export function invalidateReddit(reddit) {
-    return {
-        type: INVALIDATE_REDDIT,
-        reddit
-    }
-}
-
-function requestPosts(reddit) {
-    return {
-        type: REQUEST_POSTS,
-        reddit
-    }
-}
-
-function receivePosts(reddit, json) {
-    return {
-        type: RECEIVE_POSTS,
-        reddit,
-        posts: json.data.children.map(child => child.data),
-        receivedAt: Date.now()
-    }
-}
-
-function fetchPosts(reddit) {
-    return dispatch => {
-        dispatch(requestPosts(reddit))
-        // return fetch(`https://www.reddit.com/r/${reddit}.json`)
-        //     .then(response => response.json())
-        //     .then(json => dispatch(receivePosts(reddit, json)))
-        return $.get('/' + reddit + '.json').then(function (res) {
-            dispatch(receivePosts(reddit, res));
-        })
-    }
-}
-
-function shouldFetchPosts(state, reddit) {
-    const posts = state.postsByReddit[reddit]
-    if (!posts) {
-        return true
-    }
-    if (posts.isFetching) {
-        return false
-    }
-    return posts.didInvalidate
-}
-
-export function fetchPostsIfNeeded(reddit) {
+export function action_login ( user ) {
     return (dispatch, getState) => {
-        // return {}
-        // return dispatch(fetchPosts(reddit))
-        if (shouldFetchPosts(getState(), reddit)) {
-            return dispatch(fetchPosts(reddit))
+        if(should_login(getState(), user)) {
+            return dispatch(fetch_login(user))
         }
+    }
+}
+
+function login_request ( user ) {
+    return {
+        type: LOGIN_REQUEST,
+        user
+    }
+}
+
+function login_receive ( user, json ) {
+    return {
+        type: LOGIN_RECEIVE,
+        user,
+        isLogin: json.status
+    }
+}
+
+function fetch_login (user) {
+    return dispatch => {
+        dispatch(login_request( user));
+        return fetch(`http://localhost:3000/users/login?username=${user.username}&password=${user.password}`, {
+            credentials: 'same-origin'
+        })
+        .then( response => response.json())
+        .then( json => dispatch( login_receive( user, json )))
+    }
+}
+
+function should_login (state) {
+    return !state.login.isLogin && !state.login.isLogining
+}
+
+//登出
+export const LOGOUT = 'LOGOUT';
+
+export function action_logout() {
+    return (dispatch) => dispatch(fetch_logout())
+}
+function logout_result() {
+    return{
+        type: LOGOUT
+    }
+}
+
+function fetch_logout () {
+    return dispatch => {
+        return fetch(`http://localhost:3000/users/logout`, {
+            credentials: 'same-origin'
+        })
+        .then( response => response.json())
+        .then(
+            json => {
+                if(json.status)
+                return dispatch(logout_result())
+            }
+        )
+    }
+}
+
+//二维码请求
+export const QR_REQUEST = 'QR_REQUEST';
+export const QR_RECEIVE = 'QR_RECEIVE';
+
+export function qr (code) {
+    return (dispatch, getState) => {
+        return dispatch(fetch_qr(code))
+    }
+}
+
+function qr_request(code){
+    return{
+        type:QR_REQUEST,
+    }
+}
+
+function qr_receive(json){
+    console.log(json)
+    return{
+        type:QR_RECEIVE,
+        img: json.img
+    }
+}
+
+function fetch_qr(code){
+    return dispatch => {
+        dispatch(qr_request());
+        return fetch(`http://localhost:3000/users/qr?code=${code}`)
+        .then( response => response.json())
+        .then( json => dispatch( qr_receive(json) ) )
     }
 }

@@ -1,22 +1,18 @@
+/**
+ * Created by zjy on 16-2-1.
+ */
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-// import createLogger from 'redux-logger'
-import rootReducer from '../reducers'
+import createLogger from 'redux-logger'
 
-export default function configureStore(preloadedState) {
-    const store = createStore(
-        rootReducer,
-        preloadedState,
-        applyMiddleware(thunkMiddleware)
-    )
+const  loggerMiddleware = createLogger();
 
-    if (module.hot) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept('../reducers', () => {
-            const nextRootReducer = require('../reducers').default
-            store.replaceReducer(nextRootReducer)
-        })
-    }
+//创建加入中间件的createStore函数
+//它提供的是位于 action 被发起之后，到达 reducer 之前的扩展点
+const configureStore = applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore);
 
-    return store
-}
+//暴露store创建函数
+export default configureStore
