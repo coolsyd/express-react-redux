@@ -11,7 +11,7 @@ module.exports = function (app) {
         req.session.auth = true;
         res.json({"resultCode":"200"});
     });
-    app.use(authSession.authUser);
+    // app.use(authSession.authUser);
     app.get('/', function (req, res) {
         res.redirect('/views/');
     });

@@ -3,7 +3,6 @@
  */
 require('../css/navigation.css');
 import React from "react";
-import $ from "jquery";
 class SingleNav extends React.Component {
     render() {
         return (
@@ -12,17 +11,17 @@ class SingleNav extends React.Component {
     }
 }
 class Nav extends React.Component {
-    componentDidMount() {
-        $.get(this.props.source, function (result) {
-            var lastGist = result[0];
-            if (this.isMounted()) {
-                this.setState({
-                    username: lastGist.owner.login,
-                    lastGistUrl: lastGist.html_url
-                });
-            }
-        }.bind(this));
-    }
+    // componentDidMount() {
+    //     $.get(this.props.source, function (result) {
+    //         var lastGist = result[0];
+    //         if (this.isMounted()) {
+    //             this.setState({
+    //                 username: lastGist.owner.login,
+    //                 lastGistUrl: lastGist.html_url
+    //             });
+    //         }
+    //     }.bind(this));
+    // }
 
     render() {
         return (
