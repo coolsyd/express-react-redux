@@ -8,7 +8,7 @@ module.exports = {
    'bundle': __dirname+'/react/index.js'
   },
   output: {
-    path: __dirname + '/public',
+    path: __dirname + '/react/public',
     filename: '[name].js'
   },
   resolve: {
