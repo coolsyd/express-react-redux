@@ -5,12 +5,14 @@ var config = require('../config');
 var proxy = httpProxy.createProxyServer({});
 
 module.exports = function (app) {
-    app.get('/bundle.js', function (req, res) {
-        proxy.web(req, res, {target: 'http://localhost:8080'});
+    app.all('/manage/*', function (req, res) {
+        proxy.web(req, res, {target: 'http://' + config.PVA_interface});
+    });
+    app.all(['/service/*','/bimg/*'], function (req, res) {
+        console.log(123);
+        proxy.web(req, res, {target: 'http://' + config.PVA_url});
     });
     app.all('/PBD/*', function (req, res) {
-        proxy.web(req, res, {target: 'http://' + config.backend.host + ':' + config.backend.port}, function(e) {
-            console.log(e);
-        });
+        proxy.web(req, res, {target: 'http://' + config.PBD_interface});
     });
 };
