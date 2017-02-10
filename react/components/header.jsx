@@ -27,9 +27,55 @@ export default class Header extends React.Component {
                                 Logged in as <a href="#" className="navbar-link">Username</a>
                             </p>
                             <ul className="nav">
-                                <li activeClassName="active"><IndexLink to="/">首页</IndexLink></li>
-                                <li activeClassName="active"><Link to="/qr" activeClassName="active">二维码生成</Link></li>
-                                <li activeClassName="active"><Link property="" to="/login"  activeClassName="active"> 登录 </Link></li>
+                                <li><IndexLink to="/">首页</IndexLink></li>
+                                <li className="dropdown">
+                                    <Link property="" to="/" className="dropdown-toggle" data-toggle="dropdown" activeClassName="active"> 合成作战 <b className="caret"></b></Link>
+                                    <ul className="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li className="divider"></li>
+                                        <li className="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li> 
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                                <li className="dropdown">
+                                    <Link property="" to="/" className="dropdown-toggle" data-toggle="dropdown" activeClassName="active"> 战果统计 <b className="caret"></b></Link>
+                                    <ul className="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li className="divider"></li>
+                                        <li className="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                                <li className="dropdown">
+                                    <Link property="" to="/" className="dropdown-toggle" data-toggle="dropdown" activeClassName="active"> 研判分析 <b className="caret"></b></Link>
+                                    <ul className="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li className="divider"></li>
+                                        <li className="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                                <li className="dropdown">
+                                    <Link property="" to="/" className="dropdown-toggle" data-toggle="dropdown" activeClassName="active"> 系统管理 <b className="caret"></b></Link>
+                                    <ul className="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li className="divider"></li>
+                                        <li className="nav-header">Nav header</li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
