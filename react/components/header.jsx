@@ -28,7 +28,7 @@ export default class Header extends React.Component {
                             </p>
                             <ul className="nav">
                                 <li activeClassName="active"><IndexLink to="/">首页</IndexLink></li>
-                                <li activeClassName="active"><Link to="/qr" activeClassName="active">二维码生成</Link></li>吃
+                                <li activeClassName="active"><Link to="/qr" activeClassName="active">二维码生成</Link></li>
                                 <li activeClassName="active"><Link property="" to="/login"  activeClassName="active"> 登录 </Link></li>
                             </ul>
                         </div>

@@ -1,7 +1,7 @@
-const ReactRouter = require('./server');
-const users = require('./users');
+const serverRender = require('./serverRender');
+const serverProxy = require('./serverProxy');
 
 module.exports = function (app) {
-  app.use('/users', users);
-  app.use('/', ReactRouter);
+    app.use(serverProxy);
+    app.use('/', serverRender);
 };
