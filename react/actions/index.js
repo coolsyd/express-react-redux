@@ -30,7 +30,7 @@ function login_receive ( user, json ) {
 function fetch_login (user) {
     return dispatch => {
         dispatch(login_request( user));
-        return fetch(`http://localhost:3000/users/login?username=${user.username}&password=${user.password}`, {
+        return fetch(`/PBD/login?userName=${user.username}&password=${user.password}&type=1`, {
             credentials: 'same-origin'
         })
         .then( response => response.json())
