@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {action_login} from "../actions";
 import loginSelector from "../selectors/loginSelector";
+import history from "../history"
 
 class loginContainer extends React.Component {
     constructor(props) {
@@ -12,8 +13,17 @@ class loginContainer extends React.Component {
         };
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        console.log(nextState);
+        if (nextProps.isLogin) {
+            // history.push({
+            //     pathname:'/'
+            // })
+        }
+    }
+
     handleClick(e) {
-        const { dispatch, isLogining } = this.props;
+        const {dispatch, isLogining} = this.props;
         e.preventDefault();
         const username = this.state.username.value;
         const password = this.state.password.value;
@@ -24,7 +34,7 @@ class loginContainer extends React.Component {
                 password: password
             };
             // action_login(user);
-            dispatch( action_login(user) );
+            dispatch(action_login(user));
         }
         else {
             alert('empty');
